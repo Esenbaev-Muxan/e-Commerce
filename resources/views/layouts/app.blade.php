@@ -48,9 +48,20 @@
                     </div>
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info header-info-right">
+                            @auth
                             <ul>                                
-                                <li><i class="fi-rs-key"></i><a href="login.html">Log In </a>  / <a href="register.html">Sign Up</a></li>
+                                <li><i class="fi-rs-key"></i> {{Auth::user()->name}}  /
+                                    <form method="POST" action="{{route('logout')}}">
+                                        @csrf 
+                                        <a href="{{route('logout')}}" onclick="event.preventDefault(); this.closest('form').submit();">Logout</a>
+                                    </form>
+                                </li>
                             </ul>
+                            @else
+                            <ul>                                
+                                <li><i class="fi-rs-key"></i><a href="{{ route('login') }}">Log In </a>  / <a href="{{route('register')}}">Sign Up</a></li>
+                            </ul>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -379,22 +390,30 @@
                                     <li><a href="blog.html">Blog </a></li>                                    
                                     <li><a href="contact.html">Contact</a></li>
                                     <li><a href="#">My Account<i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href="#">Dashboard</a></li>
-                                            <li><a href="#">Products</a></li>
-                                            <li><a href="#">Categories</a></li>
-                                            <li><a href="#">Coupons</a></li>
-                                            <li><a href="#">Orders</a></li>
-                                            <li><a href="#">Customers</a></li>
-                                            <li><a href="#">Logout</a></li>                                            
-                                        </ul>
+                                        @auth
+                                            @if(Auth::user()->utype == 'ADM')
+                                                <ul class="sub-menu">
+                                                    <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
+                                                    <li><a href="#">Products</a></li>
+                                                    <li><a href="#">Categories</a></li>
+                                                    <li><a href="#">Coupons</a></li>
+                                                    <li><a href="#">Orders</a></li>
+                                                    <li><a href="#">Customers</a></li>
+                                                    <li><a href="#">Logout</a></li>                                            
+                                                </ul>
+                                            @else 
+                                                <ul class="sub-menu">
+                                                    <li><a href="{{route('user.dashboard')}}">Dashboard</a></li>                                         
+                                                </ul>
+                                            @endif
+                                        @endif
                                     </li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                     <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-smartphone"></i><span>Toll Free</span> (+1) 0000-000-000 </p>
+                        <p><i class="fi-rs-smartphone"></i><span>Toll Free</span> (+998) 95-083-20-55 </p>
                     </div>
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                     <div class="header-action-right d-block d-lg-none">

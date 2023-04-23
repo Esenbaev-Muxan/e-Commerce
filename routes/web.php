@@ -31,7 +31,7 @@ Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('/cart',CartComponent::class)->name('shop.cart');
 Route::get('/checkout',CheckoutComponent::class)->name('shop.checkout');
 
-
+ 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -46,6 +46,8 @@ Route::get('/checkout',CheckoutComponent::class)->name('shop.checkout');
 Route::middleware(['auth'])->group(function() {
     Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
 });
+
+
 
 Route::middleware(['auth','authadmin'])->group(function() {
     Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');

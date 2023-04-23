@@ -7,7 +7,7 @@
                     <span></span> Shop
                     <span></span> Your Cart
                 </div>
-            </div>
+            </div> 
         </div>
         <section class="mt-50 mb-50">
             <div class="container">

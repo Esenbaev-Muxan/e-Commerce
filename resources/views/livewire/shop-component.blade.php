@@ -7,6 +7,13 @@
         nav .hidden{
             display: block;
         }
+        .wishlisted{
+            background-color: #F15412;
+            border: 1px solid transparent;
+        }
+        .wishlisted i{
+            color: #fff;
+        }
     </style>
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -66,7 +73,9 @@
                         </div>
 
                         <div class="row product-grid-3">
-                            @foreach ($products as $product)
+                            @php
+                               $witems = Cart::instance('wishlist')->content()->pluck('id');    
+                            @endphp
                                 <div class="col-lg-4 col-md-4 col-6 col-sm-6">
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
@@ -101,6 +110,11 @@
                                                 {{-- <span class="old-price">$245.8</span> --}}
                                             </div>
                                             <div class="product-action-1 show">
+                                                @if ($witems->contains($product->id))
+                                                    <a aria-label="Add To Wishlist" class="action-btn hover-up wishlisted" href="wishlist.php"><i class="fi-rs-heart"></i></a>
+                                                @else
+                                                    <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$product->id}}, '{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-heart"></i></a>
+                                                @endif
                                                 <a aria-label="Add To Cart" class="action-btn hover-up" href="#" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-shopping-bag-add"></i></a>
 
                                             </div>

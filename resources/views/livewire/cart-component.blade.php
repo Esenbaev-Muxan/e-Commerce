@@ -31,8 +31,8 @@
                                             <strong>Success | {{Session::get('success_message')}}</strong>
                                         </div>
                                     @endif
-                                    @if(Cart::count() > 0)
-                                    @foreach (Cart::content() as $item)
+                                    @if(Cart::instance('cart')->count() > 0)
+                                    @foreach (Cart::instance('cart')->content() as $item)
                                         
                                     <tr>
                                         <td class="image product-thumbnail"><img src="{{ asset('assets/imgs/shop/product-')}}{{$item->model->id}}-1.jpg" alt="#"></td>

@@ -8,11 +8,11 @@
             display: block;
         }
         .wishlisted{
-            background-color: #F15412;
-            border: 1px solid transparent;
+            background-color: #F15412 !important;
+            border: 1px solid transparent !important;
         }
         .wishlisted i{
-            color: #fff;
+            color: #fff !important;
         }
     </style>
     <main class="main">
@@ -76,8 +76,8 @@
                             @php
                                $witems = Cart::instance('wishlist')->content()->pluck('id');    
                             @endphp
-                            @foreach ($products as $product)
-                                
+                           @foreach ($products as $product)
+                                 
                                 <div class="col-lg-4 col-md-4 col-6 col-sm-6">
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
